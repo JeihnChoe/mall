@@ -19,6 +19,20 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    @PostMapping("/product/delete")
+    public String delete(int id,HttpServletResponse response) throws IOException {
+        System.out.println("delete");
+        productRepository.deleteById(id);
+        return "redirect:/";
+    }
+    @PostMapping("/product/update")
+    public String delete(int id){
+        System.out.println("update");
+        productRepository.updateById(id);
+        return "redirect:/";
+    }
+
+
     @GetMapping("/product/{id}")
     public String detail(@PathVariable int id, HttpServletRequest request){
         System.out.println("id : "+id);
@@ -43,12 +57,15 @@ public class ProductController {
         return "write";
     }
     @PostMapping("/product")
-    public void write(String name, int price, int qty, HttpServletResponse response) throws IOException {
+    public String write(String name, int price, int qty, HttpServletResponse response) throws IOException {
         System.out.println("name : "+name);
         System.out.println("price : "+price);
         System.out.println("qty : "+qty);
 
         productRepository.save(name, price, qty);
-        response.sendRedirect("/");
+// 컨트롤러의 메서드를 재호출하는 방법 2가지
+//        response.sendRedirect("/");
+//        return "redirect:/";
+        return "redirect:/";
     }
 }

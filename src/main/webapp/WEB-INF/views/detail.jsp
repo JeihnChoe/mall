@@ -42,9 +42,17 @@
         <div class="mb-3">
             <input type="text" class="form-control" value="${product.qty}" name="qty">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+        <button type="submit" class="btn btn-primary">상품수정</button>
 
+    </form>
+
+<%--        <form action ="/product/%{product.id}/delete" method="post">        <---------------주소에 PK값을 넣어서 전달--%>
+        <form action ="/product/delete" method="post">  <%--        <--------------------- request에 담아서 전달 --%>
+            <input type="hidden" class="form-control" value="${product.id}" name="id">
+        <button type="submit" class="btn btn-danger">상품삭제</button>
+        </form>
+
+
+</div>
 </body>
 </html>

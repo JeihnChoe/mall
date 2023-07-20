@@ -53,6 +53,18 @@ public class ProductRepository {
         return product;
     }
 
+@Transactional // spring 트랜잭션(import 주의)
+    public void deleteById(int id) {
+        Query query = em.createNativeQuery("delete from product_tb where id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
 
+    public void updateById(int id) {
+        Query query = em.createNativeQuery("update :name, :price, :qty set product_tb where id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+
+    }
 }
 
