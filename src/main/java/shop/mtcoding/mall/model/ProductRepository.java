@@ -27,5 +27,32 @@ public class ProductRepository {
         List<Product> productList = query.getResultList();
         return productList;
     }
+
+    public Product findById(int id) {
+        Query query = em.createNativeQuery("select * from product_tb where  id = :id");
+        query.setParameter("id", id);
+        Product product =(Product) query.getSingleResult();
+        return product;
+    }
+    public Product findById2(int id) {
+        Query query = em.createNativeQuery("select * from product_tb where id = :id");
+        query.setParameter("id", id);
+        // row가 1건
+        // 1, 바나나, 1000, 50
+        Object[] object = (Object[]) query.getSingleResult();
+        int id2 = (int) object[0];
+        String name2 = (String) object[1];
+        int price2 = (int) object[2];
+        int qty2 = (int) object[3];
+
+        Product product = new Product();
+        product.setId(id2);
+        product.setName(name2);
+        product.setPrice(price2);
+        product.setQty(qty2);
+        return product;
+    }
+
+
 }
 
